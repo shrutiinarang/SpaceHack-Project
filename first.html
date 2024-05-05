@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Life Beyond Earth - Exoplanet Prediction</title>
+    <style>
+        /* Add some basic styling */
+        /* CSS animation to show the prediction process */
+        @keyframes prediction-animation {
+            0% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .prediction-image {
+            animation-name: prediction-animation;
+            animation-duration: 3s;
+            animation-timing-function: ease-in-out;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #13131d; /* Set the background color */
+            color: white;
+        }
+
+        header {
+            position: relative;
+            background-image: url('background_image.jpg'); /* Add the background image URL */
+            background-size: cover;
+            background-position: center;
+            color: white; /* Set text color for better contrast */
+            padding: 100px 0; /* Adjust padding for spacing */
+            text-align: center;
+        }
+
+        header h1, header p {
+            margin: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #007bff; /* Set the background color of the navigation bar */
+            padding: 10px 0;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            margin: 0;
+        }
+
+        li {
+            margin: 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: white; /* Set link color in navigation bar */
+        }
+
+        .horizontal-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #007bff; /* Set the color of the horizontal bar */
+            margin-top: 20px;
+        }
+
+        /* Add bullet points to sections */
+        section {
+            padding-left: 20px;
+        }
+
+        section p {
+            margin: 10px 0;
+        }
+
+        section ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Life Beyond Earth</h1>
+        <p>Exploring Exoplanets and Predicting Possibilities of Life</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#data">Exoplanet Data</a></li>
+            <li><a href="#prediction">Predictions</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    
+
+    <div class="horizontal-bar"></div>
+
+    <section id="data">
+        <h2>Exoplanet Data</h2>
+        <ul>
+            <li>Data Collection</li>
+            <li>Telescope Missions</li>
+            <li>Planetary Characteristics</li>
+        </ul>
+        <img src="data_image.jpg" alt="Exoplanet Data Image">
+    </section>
+
+    <div class="horizontal-bar"></div>
+    <section id="prediction">
+        <h2>Predictions</h2>
+        <form id="prediction-form">
+            <h3>Enter Exoplanetary Data</h3>
+            <label for="koi_period">KOI Period:</label>
+            <input type="text" id="koi_period" name="koi_period"><br>
+            
+            <label for="koi_teq">KOI Teq:</label>
+            <input type="text" id="koi_teq" name="koi_teq"><br>
+            
+            <label for="koi_prad">KOI Prad:</label>
+            <input type="text" id="koi_prad" name="koi_prad"><br>
+            
+            <label for="koi_insol">KOI Insol:</label>
+            <input type="text" id="koi_insol" name="koi_insol"><br>
+            
+            <button type="submit">Predict</button>
+        </form>
+        <div id="prediction-result">
+            <!-- Display the prediction result here using JavaScript -->
+        </div>
+    </section>
+    
+    <script>
+        document.getElementById('prediction-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+            const result = await response.text();
+            document.getElementById('prediction-result').textContent = `Prediction: ${result}`;
+        });
+    </script>
+    
+
+    <div class="horizontal-bar"></div>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>If you have any questions or inquiries, feel free to reach out to us.</p>
+    </section>
+    <div class="horizontal-bar"></div>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Learn about our mission to analyze exoplanet data and explore the potential for life beyond Earth.</p>
+        <img src="about_image.jpg" alt="About Us Image">
+    </section>
+    <footer>
+        <p>&copy; 2023 Life Beyond Earth</p>
+    </footer>
+</body>
+</html>
+
